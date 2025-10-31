@@ -57,7 +57,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 - `make setup` - Install all dependencies
 - `make test` - Run tests
 - `make coverage` - Run tests with coverage report
-- `make coverage-html` - Generate HTML coverage report (opens in `htmlcov/index.html`)
+- `make coverage-html` - Generate HTML coverage report (saves to `htmlcov/index.html`)
+- `make coverage-open` - Generate HTML coverage report and open in browser
 - `make coverage-report` - Show coverage summary
 - `make lint` - Run linter (ruff)
 - `make format` - Format code (ruff format)
@@ -93,7 +94,8 @@ api
 This project includes code coverage support using `pytest-cov`. You can:
 
 - Run tests with coverage: `make coverage`
-- Generate HTML coverage report: `make coverage-html` (opens `htmlcov/index.html`)
+- Generate HTML coverage report: `make coverage-html` (saves to `htmlcov/index.html`)
+- Generate and open HTML coverage report in browser: `make coverage-open`
 - View coverage summary: `make coverage-report`
 
 Coverage configuration is defined in `pyproject.toml` and excludes test files and common patterns like `__repr__` methods.

@@ -1,4 +1,4 @@
-.PHONY: help setup install test lint format clean run-api coverage coverage-report coverage-html
+.PHONY: help setup install test lint format clean run-api coverage coverage-report coverage-html coverage-open
 
 # Default target
 help:
@@ -8,6 +8,7 @@ help:
 	@echo "  make test            - Run tests"
 	@echo "  make coverage        - Run tests with coverage report"
 	@echo "  make coverage-html   - Generate HTML coverage report"
+	@echo "  make coverage-open   - Generate HTML coverage report and open in browser"
 	@echo "  make coverage-report - Show coverage summary"
 	@echo "  make lint            - Run linter (ruff)"
 	@echo "  make format          - Format code (ruff format)"
@@ -30,6 +31,11 @@ coverage:
 coverage-html:
 	uv run pytest tests/ --cov=packages --cov-report=html
 	@echo "Coverage report generated in htmlcov/index.html"
+
+# Generate HTML coverage report and open in browser
+coverage-open: coverage-html
+	@echo "Opening coverage report in browser..."
+	@open htmlcov/index.html 2>/dev/null || xdg-open htmlcov/index.html 2>/dev/null || start htmlcov/index.html 2>/dev/null || echo "Please open htmlcov/index.html manually in your browser"
 
 # Show coverage summary
 coverage-report:
