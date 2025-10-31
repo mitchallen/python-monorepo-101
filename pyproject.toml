@@ -1,0 +1,60 @@
+[project]
+name = "python-monorepo-101"
+version = "0.1.0"
+description = "A Python monorepo demo using uv and make"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+    "core",
+    "utils",
+    "api",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+core = { workspace = true }
+utils = { workspace = true }
+api = { workspace = true }
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["packages"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+precision = 2
+show_missing = true
+skip_covered = false
+
